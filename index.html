@@ -14,7 +14,7 @@
   .info{
     margin-top: 200px;
     margin-bottom: 100px;
-    padding-left: 400px;
+    padding-left: 100px;
   }
 
   .button1 {
@@ -37,6 +37,13 @@
     border: none;
     padding: 10px 24px;
   }
+  .laptops {
+  position: relative;
+  font-family: Arial;
+  border: 6px solid transparent;
+  }
+  
+
   .button4 {
     background-color: lightskyblue;
     border: none;
@@ -77,16 +84,15 @@
     <section class="column">
       <h2>Laptops</h2>
   
-      <select name="laptops" id="laptops"></select>
-      <h2 id="Laptoptitle"></h2>
+      <select class="laptops" name="laptops" id="laptops"></select>
       <h3>Features: </h3>
       <span id="description"></span>
     </section>
 
 
     <section class="info">
-      <img id ="laptopImg" src="">
-      <h4 id="Laptoptitle"></h4>
+      <img id ="laptopImg"  src="">
+      <h2 id="Laptoptitle"></h2>
       <h4 id="price">price</h4>
       <span id="description"></span>
       <button class="button4" id="BuyNowButton">BUY NOW</button>

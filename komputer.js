@@ -84,14 +84,14 @@ const laptopsElement = document.getElementById("laptops");
 const descriptionElement = document.getElementById("description");
 const titleElement = document.getElementById("Laptoptitle");
 const priceElement = document.getElementById("price");
-const descriElement = document.getElementById("descri");
+
 const buynowElement = document.getElementById("BuyNowButton")
 
 const imageElement = document.getElementById("laptopImg")
 
 //fetching api
 let laptops = [];
-
+const BASE_URL = "https://hickory-quilled-actress.glitch.me/";
 fetch("https://hickory-quilled-actress.glitch.me/computers")
   .then(response => response.json())
   .then(data => laptops = data)
@@ -101,9 +101,7 @@ const addLaptops = (laptops) => {
   laptops.forEach(x => addLaptop(x))
   descriptionElement.innerHTML=laptops[0].description;
   titleElement.innerHTML=laptops[0].title;
-  descriElement.innerHTML=laptops[0].description;
   priceElement.innerHTML=laptops[0].price+ "NOK";
-  const BASE_URL = "https://hickory-quilled-actress.glitch.me/";
   imageElement.src = BASE_URL+laptops[0].image
 
 }
@@ -116,15 +114,14 @@ const addLaptop = (laptop) =>  {
 }
 
 //add eventlistner
-select.addEventListener("change", () => {
-  const selectedLaptop = laptops.find(x => x.id == selectedLaptop.value);
-
+laptopsElement.addEventListener("change", () => {
+  const selectedLaptop = laptops.find(x => x.id == laptopsElement.value);
+console.log(BASE_URL+selectedLaptop.image)
   //
   descriptionElement.innerHTML=selectedLaptop.description;
   titleElement.innerHTML=selectedLaptop.title;
-  descriElement.innerHTML=selectedLaptop.description;
   priceElement.innerHTML=selectedLaptop.price;
-  imageElement.src = selectedLaptop.img;
+  imageElement.src = BASE_URL+selectedLaptop.image;
 });
 
 //Fetching image
