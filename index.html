@@ -1,43 +1,100 @@
 <!DOCTYPE html>
 <html>
+  <style>
+    .test {
+      background-color: #383838;
+      color: white;
+    }
+    .column {
+  float: left;
+  width: 23.33%;
+  padding: 10px;
+  margin: 10px;
+}
+  .info{
+    margin-top: 200px;
+    margin-bottom: 100px;
+    padding-left: 400px;
+  }
+
+  .button1 {
+    border: none;
+    background-color:#9DFFBD;
+    padding: 10px 54px;
+    border-radius: 4px;
+  }
+
+  .button2 {
+    background-color: #FFFF66;
+    border-radius: 4px;
+    border: none;
+    padding: 10px 24px;
+  }
+  .button3 {
+    background-color: #318CE7;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    padding: 10px 24px;
+  }
+  .button4 {
+    background-color: lightskyblue;
+    border: none;
+    padding: 10px 54px;
+    border-radius: 4px;
+  }
+
+  </style>
   <head>
     <title>Kompute Store</title>
   </head>
   <body>
     <main>
-    <header>Kompute Store</header>
+    <header class="test"><h1>Kompute Store</h1></header>
 
-    <div>
-      Bank Balance: <span id="bank-balance"></span>
-    </div>
-
-    <div>
-      Pay Balance: <span id="pay-balance"></span>
-    </div>
-
-    <div>
-      Loan Balance: <span id="loan-balance"></span>
-    </div>
-    <br />
-    <button id="work-button">Work</button>
-    <button id="bank-button">Bank</button>
-    <button id="get-loan-button">Get Loan</button>
-    <button id="repay-loan-button" style="display:none">Repay Loan</button>
+    <!--Bank functionality-->
+    <section class="column">
+      <h2>Joe Banker</h2>
+      <p>
+        Balance: <span id="bank-balance"></span>
+      </p>
+      <p>Loan Balance: <span id="loan-balance"></span></p>
+      <button class="button1" id="get-loan-button" >Get a loan</button>
+      <button id="repay-loan" style="display:none">Repay Loan</button>
+    </section>
+    
+    <!--Work functionality-->
+    <section class="column">
+      <h2>Work</h2>
+      <p>Pay: <span id="pay-balance"></span></p>
+      <br />
+      <button class="button2" id="bank-button">Bank</button>
+      <button class="button3" id="work-button">Work</button>
+    </section>
+    
     
     <!-- Laptops section -->
-    <div id="laptops">
+    <section class="column">
       <h2>Laptops</h2>
-      <p>Select a laptop:</p>
-      <select id="laptop-select">
-        <option value="">---</option>
-        <option value="laptop1">Laptop 1</option>
-        <option value="laptop2">Laptop 2</option>
-        <option value="laptop3">Laptop 3</option>
-      </select>
-      <div id="laptop-info"></div>
-    </div>
+  
+      <select name="laptops" id="laptops"></select>
+      <h2 id="Laptoptitle"></h2>
+      <h3>Features: </h3>
+      <span id="description"></span>
+    </section>
+
+
+    <section class="info">
+      <img id ="laptopImg" src="">
+      <h4 id="Laptoptitle"></h4>
+      <h4 id="price">price</h4>
+      <span id="description"></span>
+      <button class="button4" id="BuyNowButton">BUY NOW</button>
+    </section>
+  
 
     <!-- Include the JavaScript file -->
-    <script src="app.js"></script>
+    <script src="komputer.js"></script>
+    </main>
   </body>
 </html>
