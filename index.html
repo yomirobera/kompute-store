@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kompute Store</title>
+  </head>
+  <body>
+    <main>
+    <header>Kompute Store</header>
+
+    <div>
+      Bank Balance: <span id="bank-balance"></span>
+    </div>
+
+    <div>
+      Pay Balance: <span id="pay-balance"></span>
+    </div>
+
+    <div>
+      Loan Balance: <span id="loan-balance"></span>
+    </div>
+    <br />
+    <button id="work-button">Work</button>
+    <button id="bank-button">Bank</button>
+    <button id="get-loan-button">Get Loan</button>
+    <button id="repay-loan-button" style="display:none">Repay Loan</button>
+    
+    <!-- Laptops section -->
+    <div id="laptops">
+      <h2>Laptops</h2>
+      <p>Select a laptop:</p>
+      <select id="laptop-select">
+        <option value="">---</option>
+        <option value="laptop1">Laptop 1</option>
+        <option value="laptop2">Laptop 2</option>
+        <option value="laptop3">Laptop 3</option>
+      </select>
+      <div id="laptop-info"></div>
+    </div>
+
+    <!-- Include the JavaScript file -->
+    <script src="app.js"></script>
+  </body>
+</html>
