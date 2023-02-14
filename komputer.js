@@ -84,7 +84,7 @@ const laptopsElement = document.getElementById("laptops");
 const descriptionElement = document.getElementById("description");
 const titleElement = document.getElementById("Laptoptitle");
 const priceElement = document.getElementById("price");
-
+const specsElement = document.getElementById("specs");
 const buynowElement = document.getElementById("BuyNowButton")
 
 const imageElement = document.getElementById("laptopImg")
@@ -100,8 +100,9 @@ fetch("https://hickory-quilled-actress.glitch.me/computers")
 const addLaptops = (laptops) => {
   laptops.forEach(x => addLaptop(x))
   descriptionElement.innerHTML=laptops[0].description;
+  specsElement.innerHTML=laptops[0].specs;
   titleElement.innerHTML=laptops[0].title;
-  priceElement.innerHTML=laptops[0].price+ "NOK";
+  priceElement.innerHTML=laptops[0].price+ " Kr";
   imageElement.src = BASE_URL+laptops[0].image
 
 }
@@ -119,20 +120,24 @@ laptopsElement.addEventListener("change", () => {
 console.log(BASE_URL+selectedLaptop.image)
   //
   descriptionElement.innerHTML=selectedLaptop.description;
+  specsElement.innerHTML=selectedLaptop.specs;
   titleElement.innerHTML=selectedLaptop.title;
   priceElement.innerHTML=selectedLaptop.price;
   imageElement.src = BASE_URL+selectedLaptop.image;
 });
 
-//Fetching image
-//const image = "https://hickory-quilled-actress.glitch.me/assets/images/1.png";
-//fetch (image)
-  //.then(response => response.blob())
-  //.then(imageBlob => {
-    //const imageObjectURL = URL.createObjectURL(imageBlob);
-    //imageElement.src = imageObjectURL;
-  //});
-
+//Buy now button function
+buynowElement.addEventListener("click", function() {
+  const selectedLaptop =laptops.find(x => x.id === laptopsElement.value);
+  console.log(selectedLaptop);
+  if(selectedLaptop.price > bankBalance) {
+    alert("You can not afford this item");
+  }else{
+    bankBalance -= selectedLaptop.price;
+    alert("You have purchased the laptop")
+  }
+  updateDisplay();
+});
 
 // update the display on page load
 updateDisplay();
