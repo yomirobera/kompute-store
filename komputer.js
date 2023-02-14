@@ -18,14 +18,16 @@ function updateDisplay() {
   new Intl.NumberFormat('nb-NB',{style: 'currency',currency: 'NOK', currencyDisplay: 'symbol'}).format(payBalance);
   document.getElementById("loan-balance").innerHTML = 
   new Intl.NumberFormat('nb-NB',{style: 'currency',currency: 'NOK', currencyDisplay: 'symbol'}).format(loanBalance);
-}
-
-//Display the repay loan button
+  //Display the repay loan button
 if (loanBalance >0) {
   repayLoan.style.display="inline-block";
 }else {
   repayLoan.style.display="none";
+
 }
+
+}
+
 
 
 // Work button click
@@ -79,6 +81,8 @@ function handleRepayLoanButtonClick() {
   updateDisplay();
 }
 
+
+
 //LAPTOP
 const laptopsElement = document.getElementById("laptops");
 const descriptionElement = document.getElementById("description");
@@ -126,9 +130,10 @@ console.log(BASE_URL+selectedLaptop.image)
   imageElement.src = BASE_URL+selectedLaptop.image;
 });
 
+
 //Buy now button function
 buynowElement.addEventListener("click", function() {
-  const selectedLaptop =laptops.find(x => x.id === laptopsElement.value);
+  const selectedLaptop =laptops.find(x => x.id === parseInt(laptopsElement.value));
   console.log(selectedLaptop);
   if(selectedLaptop.price > bankBalance) {
     alert("You can not afford this item");
@@ -138,6 +143,7 @@ buynowElement.addEventListener("click", function() {
   }
   updateDisplay();
 });
+
 
 // update the display on page load
 updateDisplay();
