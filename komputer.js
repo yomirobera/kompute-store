@@ -1,3 +1,13 @@
+
+const laptopsElement = document.getElementById("laptops");
+const descriptionElement = document.getElementById("description");
+const titleElement = document.getElementById("Laptoptitle");
+const priceElement = document.getElementById("price");
+const specsElement = document.getElementById("specs");
+const buynowElement = document.getElementById("BuyNowButton")
+
+const imageElement = document.getElementById("laptopImg")
+
 //Making the buttons work
 document.getElementById("work-button").addEventListener("click", handleWorkButtonClick);
 document.getElementById("bank-button").addEventListener("click", handleBankButtonClick);
@@ -10,27 +20,8 @@ var payBalance = 0;
 var loanBalance = 0;
 var repayLoan = document.getElementById("repay-loan");
 
-// function to update the display with norwagian currency format
-function updateDisplay() {
-  document.getElementById("bank-balance").innerHTML = 
-  new Intl.NumberFormat('nb-NB',{style: 'currency',currency: 'NOK', currencyDisplay: 'symbol'}).format(bankBalance);
-  document.getElementById("pay-balance").innerHTML = 
-  new Intl.NumberFormat('nb-NB',{style: 'currency',currency: 'NOK', currencyDisplay: 'symbol'}).format(payBalance);
-  document.getElementById("loan-balance").innerHTML = 
-  new Intl.NumberFormat('nb-NB',{style: 'currency',currency: 'NOK', currencyDisplay: 'symbol'}).format(loanBalance);
-  //Display the repay loan button
-if (loanBalance >0) {
-  repayLoan.style.display="inline-block";
-}else {
-  repayLoan.style.display="none";
 
-}
-
-}
-
-
-
-// Work button click
+// Work button
 function handleWorkButtonClick() {
   // increase pay balance by 100
   payBalance += 100;
@@ -38,7 +29,7 @@ function handleWorkButtonClick() {
   updateDisplay();
 }
 
-// handle the bank button click
+// bank button
 function handleBankButtonClick() {
   // Minus 10% of the pay balance beacuse of loan
   if (loanBalance > 0) {
@@ -54,7 +45,7 @@ function handleBankButtonClick() {
   updateDisplay();
 }
 
-// handle the get loan button click
+//loan button
 function handleGetLoanButtonClick() {
   // prompt the user for the loan amount
   var loanAmount = prompt("Enter loan amount:");
@@ -75,6 +66,7 @@ function handleRepayLoanButtonClick() {
   loanBalance -= payBalance;
   // transfer any remaining funds after paying off the loan to the bank balance
   bankBalance += Math.max(payBalance - loanBalance, 0);
+
   // reset the pay balance
   payBalance = 0;
   // update the display
@@ -84,18 +76,10 @@ function handleRepayLoanButtonClick() {
 
 
 //LAPTOP
-const laptopsElement = document.getElementById("laptops");
-const descriptionElement = document.getElementById("description");
-const titleElement = document.getElementById("Laptoptitle");
-const priceElement = document.getElementById("price");
-const specsElement = document.getElementById("specs");
-const buynowElement = document.getElementById("BuyNowButton")
-
-const imageElement = document.getElementById("laptopImg")
-
 //fetching api
 let laptops = [];
-const BASE_URL = "https://hickory-quilled-actress.glitch.me/";
+const link = "https://hickory-quilled-actress.glitch.me/";
+
 fetch("https://hickory-quilled-actress.glitch.me/computers")
   .then(response => response.json())
   .then(data => laptops = data)
@@ -107,7 +91,7 @@ const addLaptops = (laptops) => {
   specsElement.innerHTML=laptops[0].specs;
   titleElement.innerHTML=laptops[0].title;
   priceElement.innerHTML=laptops[0].price+ " Kr";
-  imageElement.src = BASE_URL+laptops[0].image
+  imageElement.src = link+laptops[0].image
 
 }
 
@@ -121,18 +105,19 @@ const addLaptop = (laptop) =>  {
 //add eventlistner
 laptopsElement.addEventListener("change", () => {
   const selectedLaptop = laptops.find(x => x.id == laptopsElement.value);
-console.log(BASE_URL+selectedLaptop.image)
-  //
+console.log(link+selectedLaptop.image)
+  
   descriptionElement.innerHTML=selectedLaptop.description;
   specsElement.innerHTML=selectedLaptop.specs;
   titleElement.innerHTML=selectedLaptop.title;
   priceElement.innerHTML=selectedLaptop.price;
-  imageElement.src = BASE_URL+selectedLaptop.image;
+  imageElement.src = link+selectedLaptop.image;
 });
 
 
 //Buy now button function
 buynowElement.addEventListener("click", function() {
+  //String to int
   const selectedLaptop =laptops.find(x => x.id === parseInt(laptopsElement.value));
   console.log(selectedLaptop);
   if(selectedLaptop.price > bankBalance) {
@@ -144,6 +129,23 @@ buynowElement.addEventListener("click", function() {
   updateDisplay();
 });
 
-
 // update the display on page load
 updateDisplay();
+
+// function to update the display
+function updateDisplay() {
+  document.getElementById("bank-balance").innerHTML = 
+  new Intl.NumberFormat('nb-NB',{style: 'currency',currency: 'NOK', currencyDisplay: 'symbol'}).format(bankBalance);
+  document.getElementById("pay-balance").innerHTML = 
+  new Intl.NumberFormat('nb-NB',{style: 'currency',currency: 'NOK', currencyDisplay: 'symbol'}).format(payBalance);
+  document.getElementById("loan-balance").innerHTML = 
+  new Intl.NumberFormat('nb-NB',{style: 'currency',currency: 'NOK', currencyDisplay: 'symbol'}).format(loanBalance);
+
+  //Display the repay loan button, this is only if there is a loan balance
+if (loanBalance >0) {
+  repayLoan.style.display="inline-block";
+}else {
+  repayLoan.style.display="none";
+
+}
+}
